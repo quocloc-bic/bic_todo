@@ -1,9 +1,8 @@
 import 'react-native-gesture-handler';
 import { ThemeProvider } from '@shopify/restyle';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import theme, { Box } from './utils/theme';
-import Navigation from './src/navigation';
+import theme from '@bic_todo/utils/theme';
+import Navigation from '@bic_todo/navigation';
 
 export default function App() {
   return (
@@ -13,12 +12,3 @@ export default function App() {
     </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
