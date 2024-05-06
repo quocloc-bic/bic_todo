@@ -2,8 +2,10 @@ interface ICategory {
   id: number;
   name: string;
   color: string;
-  isDefault?: boolean;
+  isDefault: boolean;
 }
+
+type UpdatingCategory = Omit<ICategory, 'id' | 'isDefault'>;
 
 interface ITask {
   id: number;

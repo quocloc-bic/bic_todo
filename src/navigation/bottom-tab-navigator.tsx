@@ -7,17 +7,18 @@ import CategoriesStackNavigator from './categories-stack-navigator';
 import CompletedScreen from '../screens/completed-screen';
 import TodayScreen from '../screens/today-screen';
 import { useTheme } from '@shopify/restyle';
+import { Theme } from '@bic_todo/utils/theme';
 
 const Tab = createBottomTabNavigator<BottomTabParams>();
 
 const BottomTabNavigator = () => {
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
 
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: theme.colors.primary,
-        tabBarInactiveTintColor: theme.colors.inactive,
+        tabBarInactiveTintColor: theme.colors.gray400,
       }}>
       <Tab.Screen
         name="HomeStack"
