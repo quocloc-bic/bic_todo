@@ -1,22 +1,33 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
-import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { AppStackParams } from '../../navigation/types';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { AppNavigationType } from '../../navigation/types';
+import { initialize } from './actions';
+import { Box, Text } from '@bic_todo/utils/theme';
+import SafeAreaWrapper from '@bic_todo/components/shared/safe-area-wrapper';
 
 const SplashScreen = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<AppStackParams>>();
+  const navigation = useNavigation<AppNavigationType>();
+
+  useEffect(() => {
+    initialize().then(() => {
+      navigation.navigate('BottomTab');
+    });
+  }, []);
 
   return (
-    <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-      <Text>SplashScreen</Text>
-      <Button
-        title="go to home"
-        onPress={() => {
-          navigation.navigate('BottomTab');
-        }}
-      />
-    </View>
+    <SafeAreaWrapper>
+      <Box flex={1}>
+        <Box justifyContent="center" alignItems="center" flex={1}>
+          <Text variant="splashTitle">BIC Todo</Text>
+        </Box>
+        <Box bottom={8} left={16} right={16}>
+          <Text textAlign="center" variant="small">
+            Made by loctq
+          </Text>
+        </Box>
+      </Box>
+    </SafeAreaWrapper>
   );
 };
 

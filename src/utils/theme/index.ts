@@ -12,10 +12,18 @@ const theme = createTheme({
     '4': 16,
     '5': 20,
     '6': 24,
+    '10': 40,
+    '11': 44,
+    '12': 48,
+    '13': 56,
   },
   borderRadii: {
     none: 0,
     rounded: 8,
+    rounded12: 12,
+    rounded16: 16,
+    rounded20: 20,
+    rounded24: 24,
   },
 });
 
