@@ -24,6 +24,8 @@ const theme = createTheme({
     rounded16: 16,
     rounded20: 20,
     rounded24: 24,
+    rounded28: 28,
+    rounded32: 32,
   },
 });
 

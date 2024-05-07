@@ -11,6 +11,8 @@ interface ITask {
   id: number;
   name: string;
   isCompleted: boolean;
-  categoryId: string;
-  createdAt: number;
+  categoryId: number;
+  dueDate: number;
 }
+
+type UpdatingTask = Omit<ITask, 'id' | 'isCompleted'>;

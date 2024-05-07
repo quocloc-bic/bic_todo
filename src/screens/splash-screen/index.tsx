@@ -5,12 +5,14 @@ import { AppNavigationType } from '../../navigation/types';
 import { initialize } from './actions';
 import { Box, Text } from '@bic_todo/utils/theme';
 import SafeAreaWrapper from '@bic_todo/components/shared/safe-area-wrapper';
+import { useAppDispatch } from '@bic_todo/redux/hooks';
 
 const SplashScreen = () => {
   const navigation = useNavigation<AppNavigationType>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    initialize().then(() => {
+    dispatch(initialize()).then(() => {
       navigation.navigate('BottomTab');
     });
   }, []);

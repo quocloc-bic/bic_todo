@@ -1,21 +1,42 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { HomeNavigationType } from '@bic_todo/navigation/types';
+import TaskActions from '@bic_todo/components/tasks/task-actions';
+import { Box } from '@bic_todo/utils/theme';
+import TaskTile from '@bic_todo/components/tasks/task-tile';
+import { useAppDispatch, useAppSelector } from '@bic_todo/redux/hooks';
+import * as actions from './actions';
 
 const HomeScreen = () => {
-  const navigation = useNavigation<HomeNavigationType>();
+  const { tasks } = useAppSelector(state => state.task);
+  const dispatch = useAppDispatch();
+
+  const createNewTask = (task: UpdatingTask) => {
+    dispatch(actions.createNewTask(task));
+  };
+
+  const toggleIsCompleted = (task: ITask) => {
+    dispatch(actions.toggleIsTaskCompleted(task));
+  };
 
   return (
-    <View>
-      <Text>HomeScreen</Text>
-      <Button
-        title="edit task"
-        onPress={() => {
-          navigation.navigate('EditTask');
-        }}
+    <Box bg="white" flex={1} p="4">
+      <TaskActions
+        didCreateTask={(task: UpdatingTask) => createNewTask(task)}
       />
-    </View>
+      <Box height={26} />
+      <FlatList
+        data={tasks}
+        renderItem={({ item }) => (
+          <TaskTile
+            task={item}
+            toggleIsCompleted={() => toggleIsCompleted(item)}
+          />
+        )}
+        ItemSeparatorComponent={() => <Box height={14} />}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={item => item.id.toString()}
+      />
+    </Box>
   );
 };
 
