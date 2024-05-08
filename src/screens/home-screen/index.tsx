@@ -10,19 +10,13 @@ const HomeScreen = () => {
   const { tasks } = useAppSelector(state => state.task);
   const dispatch = useAppDispatch();
 
-  const createNewTask = (task: UpdatingTask) => {
-    dispatch(actions.createNewTask(task));
-  };
-
   const toggleIsCompleted = (task: ITask) => {
     dispatch(actions.toggleIsTaskCompleted(task));
   };
 
   return (
     <Box bg="white" flex={1} p="4">
-      <TaskActions
-        didCreateTask={(task: UpdatingTask) => createNewTask(task)}
-      />
+      <TaskActions />
       <Box height={26} />
       <FlatList
         data={tasks}

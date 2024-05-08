@@ -23,10 +23,6 @@ const UpdateTaskScreen = () => {
 
   const { task } = route.params;
 
-  const updateTask = (task: ITask) => {
-    dispatch(actions.updateTask(task)).then(() => navigation.pop());
-  };
-
   const deleteTask = () => {
     if (task) {
       dispatch(actions.deleteTask(task.id))
@@ -65,12 +61,7 @@ const UpdateTaskScreen = () => {
 
   return (
     <Box bg="white" flex={1} p="4">
-      <TaskActions
-        updatingTask={{ ...task }}
-        didCreateTask={(updatingTask: UpdatingTask) =>
-          updateTask({ ...task, ...updatingTask })
-        }
-      />
+      <TaskActions task={task} onSubmitted={() => navigation.pop()} />
     </Box>
   );
 };

@@ -1,40 +1,67 @@
-import { FlatList, Pressable, StyleSheet, TextInput, View } from 'react-native';
+import {
+  Alert,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  View,
+} from 'react-native';
 import React, { useState } from 'react';
-import { useAppSelector } from '@bic_todo/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@bic_todo/redux/hooks';
 import { Text, Box } from '@bic_todo/utils/theme';
 import { format, isToday } from 'date-fns';
 import { Calendar } from 'react-native-calendars';
 import { FontAwesome } from '@expo/vector-icons';
+import { createNewTask, updateTask } from './actions';
 
 interface TaskActionsProps {
-  updatingTask?: UpdatingTask;
-  didCreateTask: (task: UpdatingTask) => void;
+  task?: ITask;
+  onSubmitted?: () => void;
 }
 
 const today = new Date();
 
 const TaskActions = (props: TaskActionsProps) => {
+  const dispatch = useAppDispatch();
   const categories = useAppSelector(state => state.category.categories);
   const firstCategory = categories.at(0);
 
-  const initialTask: UpdatingTask = {
-    categoryId: props.updatingTask?.categoryId ?? firstCategory?.id ?? 0,
-    name: props.updatingTask?.name ?? '',
-    dueDate: props.updatingTask?.dueDate ?? Date.now(),
+  const initialTask: ITask = {
+    id: props.task?.id ?? 0,
+    categoryId: props.task?.categoryId ?? firstCategory?.id ?? 0,
+    name: props.task?.name ?? '',
+    dueDate: props.task?.dueDate ?? Date.now(),
+    isCompleted: props.task?.isCompleted ?? false,
   };
 
   const [isSelectingCategory, setIsSelectingCategory] =
     useState<boolean>(false);
   const [isSelectingDate, setIsSelectingDate] = useState<boolean>(false);
-  const [newTask, setNewTask] = useState<UpdatingTask>(initialTask);
+  const [newTask, setNewTask] = useState<ITask>(initialTask);
 
   const selectedCategory = categories?.find(
     category => category.id === newTask.categoryId,
   );
 
   const onCreateTask = () => {
-    props.didCreateTask(newTask);
-    reset();
+    let completionPromise: Promise<any>;
+
+    if (newTask.id > 0) {
+      completionPromise = dispatch(updateTask(newTask));
+    } else {
+      completionPromise = dispatch(
+        createNewTask({
+          ...newTask,
+        }),
+      );
+    }
+
+    completionPromise
+      .then(() => {
+        props.onSubmitted && props.onSubmitted();
+        reset();
+      })
+      .catch(error => Alert.alert('Error', error));
   };
 
   const reset = () => {
