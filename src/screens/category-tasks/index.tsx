@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   CategoriesNavigationType,
   CategoriesStackParams,
@@ -17,6 +17,8 @@ const CategoryTaskScreen = () => {
   const route = useRoute<CategoryTaskScreenProp>();
   const navigation = useNavigation<CategoriesNavigationType>();
   const { categoryTasks } = useAppSelector(state => state.task);
+  const page = useRef(1);
+  const hasMoreData = useRef(true);
 
   const { category } = route.params;
 
@@ -33,8 +35,25 @@ const CategoryTaskScreen = () => {
   }, [navigation]);
 
   useEffect(() => {
-    dispatch(fetchAllTasksByCategoryId(category.id));
+    dispatch(
+      fetchAllTasksByCategoryId({
+        categoryId: category.id,
+        page: page.current,
+      }),
+    );
   }, []);
+
+  const fetchMore = () => {
+    page.current = page.current + 1;
+    dispatch(
+      fetchAllTasksByCategoryId({
+        categoryId: category.id,
+        page: page.current,
+      }),
+    ).then(_hasMoreData => {
+      hasMoreData.current = _hasMoreData.payload as boolean;
+    });
+  };
 
   return (
     <Box bg="white" flex={1} p="4">
@@ -44,6 +63,8 @@ const CategoryTaskScreen = () => {
         ItemSeparatorComponent={() => <Box height={14} />}
         showsVerticalScrollIndicator={false}
         keyExtractor={item => item.id.toString()}
+        onEndReached={hasMoreData ? fetchMore : null}
+        onEndReachedThreshold={0.5}
       />
     </Box>
   );

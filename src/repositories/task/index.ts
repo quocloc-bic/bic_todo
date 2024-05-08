@@ -56,8 +56,11 @@ export const deleteTask = async (id: number): Promise<void> => {
   await SQLiteHelper.getInstance().execute(query, [id]);
 };
 
-export const fetchAllTasks = async (): Promise<ITask[]> => {
-  const query = 'SELECT * FROM tasks';
+const PAGE_SIZE = 20;
+
+export const fetchAllTasks = async (pageNumber: number): Promise<ITask[]> => {
+  const offset = (pageNumber - 1) * PAGE_SIZE;
+  const query = `SELECT * FROM tasks LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
   const result = await SQLiteHelper.getInstance().execute(query);
 
   return Array.from(result.rows._array, (row: any) => ({
@@ -69,8 +72,11 @@ export const fetchAllTasks = async (): Promise<ITask[]> => {
   }));
 };
 
-export const fetchAllCompletedTasks = async (): Promise<ITask[]> => {
-  const query = 'SELECT * FROM tasks WHERE isCompleted = 1';
+export const fetchAllCompletedTasks = async (
+  pageNumber: number,
+): Promise<ITask[]> => {
+  const offset = (pageNumber - 1) * PAGE_SIZE;
+  const query = `SELECT * FROM tasks WHERE isCompleted = 1 LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
   const result = await SQLiteHelper.getInstance().execute(query);
 
   return Array.from(result.rows._array, (row: any) => ({
@@ -82,9 +88,11 @@ export const fetchAllCompletedTasks = async (): Promise<ITask[]> => {
   }));
 };
 
-export const fetchAllTodayTasks = async (): Promise<ITask[]> => {
-  const query = `SELECT * FROM tasks WHERE date(dueDate / 1000, 'unixepoch') = date('now', 'start of day')
-  `;
+export const fetchAllTodayTasks = async (
+  pageNumber: number,
+): Promise<ITask[]> => {
+  const offset = (pageNumber - 1) * PAGE_SIZE;
+  const query = `SELECT * FROM tasks WHERE date(dueDate / 1000, 'unixepoch') = date('now', 'start of day') LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
   const result = await SQLiteHelper.getInstance().execute(query, []);
 
   return Array.from(result.rows._array, (row: any) => ({
@@ -98,8 +106,10 @@ export const fetchAllTodayTasks = async (): Promise<ITask[]> => {
 
 export const fetchAllTasksByCategoryId = async (
   categoryId: number,
+  pageNumber: number,
 ): Promise<ITask[]> => {
-  const query = 'SELECT * FROM tasks WHERE categoryId = ?';
+  const offset = (pageNumber - 1) * PAGE_SIZE;
+  const query = `SELECT * FROM tasks WHERE categoryId = ? LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
   const result = await SQLiteHelper.getInstance().execute(query, [categoryId]);
 
   return Array.from(result.rows._array, (row: any) => ({
