@@ -5,7 +5,7 @@ export const createTasksTableIfNotExist = async () => {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     isCompleted INTEGER NOT NULL CHECK (isCompleted IN (0, 1)),
-    categoryId TEXT NOT NULL,
+    categoryId INTEGER NOT NULL,
     dueDate INTEGER NOT NULL, 
     FOREIGN KEY(categoryId) REFERENCES categories(id) ON DELETE CASCADE)`;
   await SQLiteHelper.getInstance().execute(query);
@@ -83,9 +83,9 @@ export const fetchAllCompletedTasks = async (): Promise<ITask[]> => {
 };
 
 export const fetchAllTodayTasks = async (): Promise<ITask[]> => {
-  const today = new Date().toISOString().split('T')[0];
-  const query = `SELECT * FROM tasks WHERE date(dueDate) = ?`;
-  const result = await SQLiteHelper.getInstance().execute(query, [today]);
+  const query = `SELECT * FROM tasks WHERE date(dueDate / 1000, 'unixepoch') = date('now', 'start of day')
+  `;
+  const result = await SQLiteHelper.getInstance().execute(query, []);
 
   return Array.from(result.rows._array, (row: any) => ({
     id: row.id,
