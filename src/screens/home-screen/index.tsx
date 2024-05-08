@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import TaskActions from '@bic_todo/components/tasks/task-actions';
 import { Box } from '@bic_todo/utils/theme';
 import TaskTile from '@bic_todo/components/tasks/task-tile';

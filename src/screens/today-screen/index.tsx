@@ -15,13 +15,8 @@ const TodayScreen = () => {
     dispatch(fetchAllTodayTasks(page.current));
   }, []);
 
-  // useEffect(() => {
-  //   console.log('todayTasks', todayTasks);
-  // }, [todayTasks]);
-
   const fetchMore = () => {
     page.current = page.current + 1;
-    console.log('fetchAllTodayTasks');
 
     dispatch(fetchAllTodayTasks(page.current)).then(_hasMoreData => {
       hasMoreData.current = _hasMoreData.payload as boolean;

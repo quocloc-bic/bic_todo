@@ -2,7 +2,7 @@ import { FlatList, StyleSheet } from 'react-native';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@bic_todo/redux/hooks';
 import { fetchAllCategories } from './actions';
-import { Box, Text } from '@bic_todo/utils/theme';
+import { Box } from '@bic_todo/utils/theme';
 import CreateNewCategory from '@bic_todo/components/categories/create-new-category';
 import CategoryTile from '@bic_todo/components/categories/category-tile';
 

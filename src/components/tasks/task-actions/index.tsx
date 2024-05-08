@@ -4,7 +4,6 @@ import {
   Pressable,
   StyleSheet,
   TextInput,
-  View,
 } from 'react-native';
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@bic_todo/redux/hooks';
