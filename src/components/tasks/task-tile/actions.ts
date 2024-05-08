@@ -2,8 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as repository from '@bic_todo/repositories/task';
 import * as taskSlice from '@bic_todo/redux/slices/taskSlice';
 
-export const toggleIsTaskCompleted = createAsyncThunk(
-  'task/toggleIsTaskCompleted',
+export const toggleTaskCompletion = createAsyncThunk(
+  'task/toggleTaskCompletion',
   async (task: ITask, { dispatch }) => {
     const updatingTask: ITask = {
       ...task,
