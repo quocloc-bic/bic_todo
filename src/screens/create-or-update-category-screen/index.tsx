@@ -6,7 +6,7 @@ import {
 } from '@bic_todo/navigation/types';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useTheme } from '@shopify/restyle';
-import { Box, Text, Theme } from '@bic_todo/utils/theme';
+import { Box, Theme } from '@bic_todo/utils/theme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getCategoryColorPalette } from '@bic_todo/utils/helpers';
 import { useAppDispatch } from '@bic_todo/redux/hooks';

@@ -18,7 +18,7 @@ export type BottomTabParams = {
 // Params for home stack navigation
 export type HomeStackParams = {
   Home: BaseStackProps;
-  EditTask: {
+  UpdateTask: {
     task: ITask;
   };
 };

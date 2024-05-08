@@ -13,8 +13,8 @@ interface TaskTileProps {
 const TaskTile = (props: TaskTileProps) => {
   const navigation = useNavigation<HomeNavigationType>();
 
-  const navigateToEditTask = () => {
-    navigation.navigate('EditTask', {
+  const navigateToUpdateTask = () => {
+    navigation.navigate('UpdateTask', {
       task: props.task,
     });
   };
@@ -40,7 +40,7 @@ const TaskTile = (props: TaskTileProps) => {
             </Text>
           </Box>
 
-          <Pressable onPress={navigateToEditTask}>
+          <Pressable onPress={navigateToUpdateTask}>
             <Entypo name="dots-three-vertical" size={16} />
           </Pressable>
         </Box>

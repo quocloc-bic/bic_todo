@@ -7,6 +7,7 @@ import { Calendar } from 'react-native-calendars';
 import { FontAwesome } from '@expo/vector-icons';
 
 interface TaskActionsProps {
+  updatingTask?: UpdatingTask;
   didCreateTask: (task: UpdatingTask) => void;
 }
 
@@ -16,16 +17,16 @@ const TaskActions = (props: TaskActionsProps) => {
   const categories = useAppSelector(state => state.category.categories);
   const firstCategory = categories.at(0);
 
-  const defaultNewTask: UpdatingTask = {
-    categoryId: firstCategory?.id ?? 0,
-    name: '',
-    dueDate: Date.now(),
+  const initialTask: UpdatingTask = {
+    categoryId: props.updatingTask?.categoryId ?? firstCategory?.id ?? 0,
+    name: props.updatingTask?.name ?? '',
+    dueDate: props.updatingTask?.dueDate ?? Date.now(),
   };
 
   const [isSelectingCategory, setIsSelectingCategory] =
     useState<boolean>(false);
   const [isSelectingDate, setIsSelectingDate] = useState<boolean>(false);
-  const [newTask, setNewTask] = useState<UpdatingTask>(defaultNewTask);
+  const [newTask, setNewTask] = useState<UpdatingTask>(initialTask);
 
   const selectedCategory = categories?.find(
     category => category.id === newTask.categoryId,
@@ -37,7 +38,7 @@ const TaskActions = (props: TaskActionsProps) => {
   };
 
   const reset = () => {
-    setNewTask(defaultNewTask);
+    setNewTask(initialTask);
   };
 
   return (
