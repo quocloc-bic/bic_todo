@@ -97,7 +97,7 @@ export const fetchAllTodayTasks = async (): Promise<ITask[]> => {
 };
 
 export const fetchAllTasksByCategoryId = async (
-  categoryId: string,
+  categoryId: number,
 ): Promise<ITask[]> => {
   const query = 'SELECT * FROM tasks WHERE categoryId = ?';
   const result = await SQLiteHelper.getInstance().execute(query, [categoryId]);

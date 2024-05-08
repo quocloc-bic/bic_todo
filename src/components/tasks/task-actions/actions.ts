@@ -26,8 +26,6 @@ export const createNewTask = createAsyncThunk(
 export const updateTask = createAsyncThunk(
   'task/update',
   async (task: ITask, { dispatch }) => {
-    console.log('updateTask', task);
-
     await repository.updateTask(task);
 
     dispatch(taskSlice.updateTask(task));

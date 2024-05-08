@@ -27,7 +27,7 @@ export type HomeStackParams = {
 export type CategoriesStackParams = {
   Categories: BaseStackProps;
   CategoryTasks: {
-    id: number;
+    category: ICategory;
   };
   CreateOrUpdateCategory: {
     category?: ICategory;

@@ -4,12 +4,14 @@ interface TaskState {
   tasks: ITask[];
   todayTasks: ITask[];
   completedTasks: ITask[];
+  categoryTasks: ITask[];
 }
 
 const initialState: TaskState = {
   tasks: [],
   todayTasks: [],
   completedTasks: [],
+  categoryTasks: [],
 };
 
 const taskSlice = createSlice({
@@ -34,6 +36,13 @@ const taskSlice = createSlice({
         Object.assign(existingTaskOnTodayTasks, action.payload);
       }
 
+      const existingTaskOnCategoryTasks = state.categoryTasks.find(
+        task => task.id === id,
+      );
+      if (existingTaskOnCategoryTasks) {
+        Object.assign(existingTaskOnCategoryTasks, action.payload);
+      }
+
       const existingTaskOnCompletedTasks = state.completedTasks.find(
         task => task.id === id,
       );
@@ -55,6 +64,7 @@ const taskSlice = createSlice({
       state.tasks = state.tasks.filter(task => task.id !== idToDelete);
       state.todayTasks = state.tasks.filter(task => task.id !== idToDelete);
       state.completedTasks = state.tasks.filter(task => task.id !== idToDelete);
+      state.categoryTasks = state.tasks.filter(task => task.id !== idToDelete);
     },
     fetchAllTasks(state, action: PayloadAction<ITask[]>) {
       state.tasks = action.payload;
@@ -64,6 +74,9 @@ const taskSlice = createSlice({
     },
     fetchAllCompletedTasks(state, action: PayloadAction<ITask[]>) {
       state.completedTasks = action.payload;
+    },
+    fetchAllCategoryTasks(state, action: PayloadAction<ITask[]>) {
+      state.categoryTasks = action.payload;
     },
   },
 });
@@ -75,6 +88,7 @@ export const {
   fetchAllTasks,
   fetchAllTodayTasks,
   fetchAllCompletedTasks,
+  fetchAllCategoryTasks,
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

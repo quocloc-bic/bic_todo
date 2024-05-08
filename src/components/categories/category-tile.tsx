@@ -19,7 +19,7 @@ const CategoryTile = (props: CategoryTileProps) => {
 
   const navigateToCategoryScreen = () => {
     navigation.navigate('CategoryTasks', {
-      id: props.category.id,
+      category: props.category,
     });
   };
 
