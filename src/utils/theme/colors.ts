@@ -1,0 +1,63 @@
+export const palette = {
+  primary: '#874ECA',
+  white: '#ffffff',
+  transparent: 'transparent',
+  lightGray: '#EDECEF',
+
+  gray50: '#f9fafb',
+  gray100: '#f3f4f6',
+  gray200: '#e5e7eb',
+  gray250: '#efeff0',
+  gray300: '#d1d5db',
+  gray400: '#9ca3af',
+  gray500: '#6b7280',
+  gray600: '#4b5563',
+  gray700: '#374151',
+  gray800: '#1f2937',
+  gray900: '#111827',
+
+  purple50: '#faf5ff',
+  purple100: '#f3e8ff',
+  purple200: '#e9d5ff',
+  purple300: '#d8b4fe',
+  purple400: '#c084fc',
+  purple500: '#a855f7',
+  purple600: '#9333ea',
+  purple700: '#7e22ce',
+  purple800: '#6b21a8',
+  purple900: '#581c87',
+
+  red500: '#ef4444',
+};
+
+export const colors = {
+  primary: palette.primary,
+  white: palette.white,
+  transparent: palette.transparent,
+  lightGray: palette.lightGray,
+
+  gray50: palette.gray50,
+  gray100: palette.gray100,
+  gray200: palette.gray200,
+  gray250: palette.gray250,
+  gray300: palette.gray300,
+  gray400: palette.gray400,
+  gray500: palette.gray500,
+  gray600: palette.gray600,
+  gray700: palette.gray700,
+  gray800: palette.gray800,
+  gray900: palette.gray900,
+
+  purple50: palette.purple50,
+  purple100: palette.purple100,
+  purple200: palette.purple200,
+  purple300: palette.purple300,
+  purple400: palette.purple400,
+  purple500: palette.purple500,
+  purple600: palette.purple600,
+  purple700: palette.purple700,
+  purple800: palette.purple800,
+  purple900: palette.purple900,
+
+  red500: palette.red500,
+};
