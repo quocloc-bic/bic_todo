@@ -1,19 +1,13 @@
-import {
-  openDatabase,
-  SQLTransaction,
-  SQLiteDatabase,
-  SQLResultSet,
-  SQLStatementArg,
-} from 'expo-sqlite';
+import * as SQLite from 'expo-sqlite';
 
 const DATABASE_NAME = 'db.db';
 
 class SQLiteHelper {
   private static instance: SQLiteHelper | null = null;
-  private db: SQLiteDatabase;
+  private db: SQLite.SQLiteDatabase;
 
   constructor(databaseName: string) {
-    this.db = openDatabase(databaseName);
+    this.db = SQLite.openDatabaseSync(databaseName);
   }
 
   static getInstance(): SQLiteHelper {
@@ -23,25 +17,22 @@ class SQLiteHelper {
     return SQLiteHelper.instance;
   }
 
-  async execute(
+  async execute(sqlStatement: string) {
+    return this.db.execAsync(sqlStatement);
+  }
+
+  async run(
     sqlStatement: string,
-    args?: SQLStatementArg[] | undefined,
-  ): Promise<SQLResultSet> {
-    return new Promise((resolve, reject) => {
-      this.db.transaction((transaction: SQLTransaction) => {
-        transaction.executeSql(
-          sqlStatement,
-          args,
-          (_, resultSet: SQLResultSet) => {
-            resolve(resultSet);
-          },
-          (_, error) => {
-            reject(error);
-            return true;
-          },
-        );
-      });
-    });
+    params: SQLite.SQLiteBindParams = [],
+  ): Promise<SQLite.SQLiteRunResult> {
+    return this.db.runAsync(sqlStatement, params);
+  }
+
+  async getAll<T>(
+    sqlStatement: string,
+    params: SQLite.SQLiteBindParams = [],
+  ): Promise<T[]> {
+    return this.db.getAllAsync(sqlStatement, params);
   }
 }
 

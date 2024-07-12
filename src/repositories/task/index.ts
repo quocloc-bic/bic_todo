@@ -17,32 +17,25 @@ export const createTask = async (
   dueDate: number,
 ): Promise<number | undefined> => {
   const query = `INSERT INTO tasks (name, isCompleted, categoryId, dueDate) VALUES (?, ?, ?, ?)`;
-  const result = await SQLiteHelper.getInstance().execute(query, [
+  const result = await SQLiteHelper.getInstance().run(query, [
     name,
     0,
     categoryId,
     dueDate,
   ]);
 
-  return result.insertId;
+  return result.lastInsertRowId;
 };
 
 export const findTaskById = async (id: number): Promise<ITask | undefined> => {
   const query = `SELECT * FROM tasks WHERE id = ?`;
-  const result = await SQLiteHelper.getInstance().execute(query, [id]);
-
-  return Array.from(result.rows._array, (row: any) => ({
-    id: row.id,
-    name: row.name,
-    isCompleted: row.isCompleted === 1,
-    categoryId: row.categoryId,
-    dueDate: row.dueDate,
-  })).at(0);
+  const result = await SQLiteHelper.getInstance().getAll<ITask>(query, [id]);
+  return result.at(0);
 };
 
 export const updateTask = async (data: ITask): Promise<void> => {
   const query = `UPDATE tasks SET name = ?, isCompleted = ?, categoryId = ?, dueDate = ? WHERE id = ?`;
-  await SQLiteHelper.getInstance().execute(query, [
+  await SQLiteHelper.getInstance().run(query, [
     data.name,
     data.isCompleted ? 1 : 0,
     data.categoryId,
@@ -53,7 +46,7 @@ export const updateTask = async (data: ITask): Promise<void> => {
 
 export const deleteTask = async (id: number): Promise<void> => {
   const query = `DELETE FROM tasks where id = ?`;
-  await SQLiteHelper.getInstance().execute(query, [id]);
+  await SQLiteHelper.getInstance().run(query, [id]);
 };
 
 const PAGE_SIZE = 20;
@@ -61,15 +54,7 @@ const PAGE_SIZE = 20;
 export const fetchAllTasks = async (pageNumber: number): Promise<ITask[]> => {
   const offset = (pageNumber - 1) * PAGE_SIZE;
   const query = `SELECT * FROM tasks LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
-  const result = await SQLiteHelper.getInstance().execute(query);
-
-  return Array.from(result.rows._array, (row: any) => ({
-    id: row.id,
-    name: row.name,
-    isCompleted: row.isCompleted === 1,
-    categoryId: row.categoryId,
-    dueDate: row.dueDate,
-  }));
+  return await SQLiteHelper.getInstance().getAll<ITask>(query);
 };
 
 export const fetchAllCompletedTasks = async (
@@ -77,15 +62,7 @@ export const fetchAllCompletedTasks = async (
 ): Promise<ITask[]> => {
   const offset = (pageNumber - 1) * PAGE_SIZE;
   const query = `SELECT * FROM tasks WHERE isCompleted = 1 LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
-  const result = await SQLiteHelper.getInstance().execute(query);
-
-  return Array.from(result.rows._array, (row: any) => ({
-    id: row.id,
-    name: row.name,
-    isCompleted: row.isCompleted === 1,
-    categoryId: row.categoryId,
-    dueDate: row.dueDate,
-  }));
+  return await SQLiteHelper.getInstance().getAll<ITask>(query);
 };
 
 export const fetchAllTodayTasks = async (
@@ -93,15 +70,7 @@ export const fetchAllTodayTasks = async (
 ): Promise<ITask[]> => {
   const offset = (pageNumber - 1) * PAGE_SIZE;
   const query = `SELECT * FROM tasks WHERE date(dueDate / 1000, 'unixepoch') = date('now', 'start of day') LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
-  const result = await SQLiteHelper.getInstance().execute(query, []);
-
-  return Array.from(result.rows._array, (row: any) => ({
-    id: row.id,
-    name: row.name,
-    isCompleted: row.isCompleted === 1,
-    categoryId: row.categoryId,
-    dueDate: row.dueDate,
-  }));
+  return await SQLiteHelper.getInstance().getAll<ITask>(query);
 };
 
 export const fetchAllTasksByCategoryId = async (
@@ -110,13 +79,5 @@ export const fetchAllTasksByCategoryId = async (
 ): Promise<ITask[]> => {
   const offset = (pageNumber - 1) * PAGE_SIZE;
   const query = `SELECT * FROM tasks WHERE categoryId = ? LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
-  const result = await SQLiteHelper.getInstance().execute(query, [categoryId]);
-
-  return Array.from(result.rows._array, (row: any) => ({
-    id: row.id,
-    name: row.name,
-    isCompleted: row.isCompleted === 1,
-    categoryId: row.categoryId,
-    dueDate: row.dueDate,
-  }));
+  return await SQLiteHelper.getInstance().getAll<ITask>(query, [categoryId]);
 };
