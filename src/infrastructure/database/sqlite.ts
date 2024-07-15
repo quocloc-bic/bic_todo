@@ -1,4 +1,3 @@
-import LocalDatabase from '@bic_todo/data/protocols/local-database';
 import * as ExpoSQLite from 'expo-sqlite';
 
 const DATABASE_NAME = 'db.db';

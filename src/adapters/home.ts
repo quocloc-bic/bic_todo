@@ -1,10 +1,7 @@
 import * as TaskUseCases from '@bic_todo/domain/use-cases/task';
 import { useReduxTaskState } from '@bic_todo/infrastructure/implementations/redux-state/task';
 import { useSqliteTaskRepository } from '@bic_todo/infrastructure/implementations/sqlite-repositories/task';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '@bic_todo/infrastructure/redux/hooks';
+import { useAppSelector } from '@bic_todo/infrastructure/redux/hooks';
 import { AppDispatch } from '@bic_todo/infrastructure/redux/store';
 import { useMemo, useRef } from 'react';
 import { useDispatch } from 'react-redux';
