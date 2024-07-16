@@ -94,13 +94,11 @@ export const fetchAllTasksByCategoryId = async (
   repository: ITaskRepository,
   state: ITaskState,
 ): Promise<boolean> => {
-  console.log('🚀 ~ categoryId:', categoryId);
   const tasks = await repository.fetchAllTasksByCategoryId(
     categoryId,
     pageNumber,
     limit,
   );
-  console.log('🚀 ~ tasks:', tasks);
   const appending = pageNumber != 1;
   state.setCategoryTasks(tasks, appending);
 
