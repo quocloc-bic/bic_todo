@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 
 export const useHomeScreen = () => {
   const dispatch: AppDispatch = useDispatch();
-  const taskState = useReduxTaskState(dispatch);
+  const state = useReduxTaskState(dispatch);
   const repository = useSqliteTaskRepository();
   const pageNumber = useRef(1);
   const hasMoreData = useRef(true);
@@ -24,7 +24,7 @@ export const useHomeScreen = () => {
         pageNumber.current,
         pageSize,
         repository,
-        taskState,
+        state,
       );
       hasMoreData.current = _hasMoreData;
     },
@@ -40,7 +40,7 @@ export const useHomeScreen = () => {
         pageNumber.current,
         pageSize,
         repository,
-        taskState,
+        state,
       );
       hasMoreData.current = _hasMoreData;
     },

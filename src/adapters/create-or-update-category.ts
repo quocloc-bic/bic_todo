@@ -8,34 +8,26 @@ import { useDispatch } from 'react-redux';
 
 export const useCreateOrUpdateCategoryScreen = () => {
   const dispatch: AppDispatch = useDispatch();
-  const categoryState = useReduxCategoryState(dispatch);
-  const categoryRepository = useSqliteCategoryRepository();
+  const state = useReduxCategoryState(dispatch);
+  const repository = useSqliteCategoryRepository();
 
   const createNewCategory = useMemo(
     () => async (params: CategoryUseCases.CategoryCreatingParams) => {
-      CategoryUseCases.createCategory(
-        params,
-        categoryRepository,
-        categoryState,
-      );
+      CategoryUseCases.createCategory(params, repository, state);
     },
     [],
   );
 
   const updateCategory = useMemo(
     () => async (category: ICategory) => {
-      CategoryUseCases.updateCategory(
-        category,
-        categoryRepository,
-        categoryState,
-      );
+      CategoryUseCases.updateCategory(category, repository, state);
     },
     [],
   );
 
   const deleteCategory = useMemo(
     () => async (id: number) => {
-      CategoryUseCases.deleteCategory(id, categoryRepository, categoryState);
+      CategoryUseCases.deleteCategory(id, repository, state);
     },
     [],
   );

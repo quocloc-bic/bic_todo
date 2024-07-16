@@ -1,6 +1,6 @@
 import { ICategory } from '../entities/category';
 import { ICategoryRepository } from '../repositories/category-repository';
-import { ICategoryState } from '../repositories/category-state';
+import { ICategoryState } from '../state-managers/category-state';
 
 export type CategoryCreatingParams = {
   name: string;

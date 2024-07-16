@@ -1,5 +1,5 @@
 import { ICategory } from '@bic_todo/domain/entities/category';
-import { ICategoryState } from '@bic_todo/domain/repositories/category-state';
+import { ICategoryState } from '@bic_todo/domain/state-managers/category-state';
 import { ReduxCategoryActions } from '@bic_todo/infrastructure/redux/slices/categorySlice';
 import { AppDispatch } from '@bic_todo/infrastructure/redux/store';
 

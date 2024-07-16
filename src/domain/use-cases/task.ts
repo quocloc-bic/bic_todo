@@ -1,6 +1,6 @@
 import { ITask } from '../entities/task';
 import { ITaskRepository } from '../repositories/task-repository';
-import { ITaskState } from '../repositories/task-state';
+import { ITaskState } from '../state-managers/task-state';
 
 export type TaskCreatingParams = {
   name: string;
@@ -94,11 +94,13 @@ export const fetchAllTasksByCategoryId = async (
   repository: ITaskRepository,
   state: ITaskState,
 ): Promise<boolean> => {
+  console.log('🚀 ~ categoryId:', categoryId);
   const tasks = await repository.fetchAllTasksByCategoryId(
     categoryId,
     pageNumber,
     limit,
   );
+  console.log('🚀 ~ tasks:', tasks);
   const appending = pageNumber != 1;
   state.setCategoryTasks(tasks, appending);
 

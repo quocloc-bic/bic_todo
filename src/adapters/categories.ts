@@ -8,14 +8,14 @@ import { useDispatch } from 'react-redux';
 
 export const useCategoriesScreen = () => {
   const dispatch: AppDispatch = useDispatch();
-  const categoryState = useReduxCategoryState(dispatch);
-  const categoryRepository = useSqliteCategoryRepository();
+  const state = useReduxCategoryState(dispatch);
+  const repository = useSqliteCategoryRepository();
 
   const categories = useAppSelector(state => state.category.categories);
 
   const fetchAllCategories = useMemo(
     () => async () => {
-      CategoryUseCases.fetchAllCategories(categoryRepository, categoryState);
+      CategoryUseCases.fetchAllCategories(repository, state);
     },
     [],
   );

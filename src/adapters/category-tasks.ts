@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 
 export const useCategoryTasksScreen = (categoryId: number) => {
   const dispatch: AppDispatch = useDispatch();
-  const taskState = useReduxTaskState(dispatch);
+  const state = useReduxTaskState(dispatch);
   const repository = useSqliteTaskRepository();
   const pageNumber = useRef(1);
   const hasMoreData = useRef(true);
@@ -25,7 +25,7 @@ export const useCategoryTasksScreen = (categoryId: number) => {
         pageNumber.current,
         pageSize,
         repository,
-        taskState,
+        state,
       );
       hasMoreData.current = _hasMoreData;
     },
@@ -42,7 +42,7 @@ export const useCategoryTasksScreen = (categoryId: number) => {
         pageNumber.current,
         pageSize,
         repository,
-        taskState,
+        state,
       );
       hasMoreData.current = _hasMoreData;
     },

@@ -1,5 +1,5 @@
 import { ITask } from '@bic_todo/domain/entities/task';
-import { ITaskState } from '@bic_todo/domain/repositories/task-state';
+import { ITaskState } from '@bic_todo/domain/state-managers/task-state';
 import { ReduxTaskActions } from '@bic_todo/infrastructure/redux/slices/taskSlice';
 import { AppDispatch } from '@bic_todo/infrastructure/redux/store';
 

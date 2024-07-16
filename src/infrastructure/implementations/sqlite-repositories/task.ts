@@ -87,7 +87,7 @@ export class SqliteTaskRepository implements ITaskRepository {
     limit: number,
   ): Promise<ITask[]> {
     const offset = (pageNumber - 1) * limit;
-    const query = `SELECT * FROM tasks categoryId = ? LIMIT ? OFFSET ?`;
+    const query = `SELECT * FROM tasks WHERE categoryId = ? LIMIT ? OFFSET ?`;
     return await this.database.getAll<ITask>(query, [
       categoryId,
       limit,
