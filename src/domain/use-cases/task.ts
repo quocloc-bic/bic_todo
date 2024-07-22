@@ -1,6 +1,6 @@
-import { ITask } from '../entities/task';
-import { ITaskRepository } from '../repositories/task-repository';
-import { ITaskState } from '../state-managers/task-state';
+import { ITask } from '@bic_todo/domain/entities/task';
+import { ITaskRepository } from '@bic_todo/domain/repositories/task-repository';
+import { ITaskState } from '@bic_todo/domain/state-managers/task-state';
 
 export type TaskCreatingParams = {
   name: string;

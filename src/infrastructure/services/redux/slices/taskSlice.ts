@@ -1,4 +1,5 @@
 import { ITask } from '@bic_todo/domain/entities/task';
+import { isTimestampToday } from '@bic_todo/utils/helpers';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface TaskListPayload {
@@ -25,7 +26,12 @@ const taskSlice = createSlice({
   initialState,
   reducers: {
     addTask(state, action: PayloadAction<ITask>) {
-      state.tasks.push(action.payload);
+      const task = action.payload;
+      state.tasks.push(task);
+
+      if (isTimestampToday(task.dueDate)) {
+        state.todayTasks.push(task);
+      }
     },
     updateTask(state, action: PayloadAction<ITask>) {
       const { id } = action.payload;
@@ -40,6 +46,8 @@ const taskSlice = createSlice({
       );
       if (existingTaskOnTodayTasks) {
         Object.assign(existingTaskOnTodayTasks, action.payload);
+      } else if (isTimestampToday(action.payload.dueDate)) {
+        state.todayTasks.push(action.payload);
       }
 
       const existingTaskOnCategoryTasks = state.categoryTasks.find(

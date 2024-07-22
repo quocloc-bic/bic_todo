@@ -14,3 +14,15 @@ const categoryColorPalette = [
 export const getCategoryColorPalette = () => {
   return categoryColorPalette;
 };
+
+export const isTimestampToday = (timestamp: number): boolean => {
+  const dueDate = new Date(timestamp);
+  const today = new Date();
+
+  // Compare year, month, and day
+  return (
+    dueDate.getFullYear() === today.getFullYear() &&
+    dueDate.getMonth() === today.getMonth() &&
+    dueDate.getDate() === today.getDate()
+  );
+};

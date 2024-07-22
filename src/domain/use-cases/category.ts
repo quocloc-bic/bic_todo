@@ -1,6 +1,6 @@
-import { ICategory } from '../entities/category';
-import { ICategoryRepository } from '../repositories/category-repository';
-import { ICategoryState } from '../state-managers/category-state';
+import { ICategory } from '@bic_todo/domain/entities/category';
+import { ICategoryRepository } from '@bic_todo/domain/repositories/category-repository';
+import { ICategoryState } from '@bic_todo/domain/state-managers/category-state';
 
 export type CategoryCreatingParams = {
   name: string;

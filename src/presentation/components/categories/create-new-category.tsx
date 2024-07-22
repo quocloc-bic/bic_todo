@@ -32,5 +32,3 @@ const CreateNewCategory = () => {
 };
 
 export default CreateNewCategory;
-
-const styles = StyleSheet.create({});

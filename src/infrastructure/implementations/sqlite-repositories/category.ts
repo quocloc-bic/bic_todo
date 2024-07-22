@@ -1,6 +1,6 @@
 import { ICategory } from '@bic_todo/domain/entities/category';
 import { ICategoryRepository } from '@bic_todo/domain/repositories/category-repository';
-import SQLite from '@bic_todo/infrastructure/database/sqlite';
+import SQLite from '@bic_todo/infrastructure/services/database/sqlite';
 
 export class SqliteCategoryRepository implements ICategoryRepository {
   constructor(private readonly database: SQLite) {}

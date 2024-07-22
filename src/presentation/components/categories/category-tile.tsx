@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { CategoriesNavigationType } from '@bic_todo/presentation/navigation/types';
 import { Box, Text } from '@bic_todo/utils/theme';
 import { Entypo, FontAwesome } from '@expo/vector-icons';
+import { ICategory } from '@bic_todo/domain/entities/category';
 
 interface CategoryTileProps {
   category: ICategory;
@@ -50,5 +51,3 @@ const CategoryTile = (props: CategoryTileProps) => {
 };
 
 export default CategoryTile;
-
-const styles = StyleSheet.create({});

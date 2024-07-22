@@ -176,5 +176,3 @@ const CreateOrUpdateCategoryScreen = () => {
 };
 
 export default CreateOrUpdateCategoryScreen;
-
-const styles = StyleSheet.create({});

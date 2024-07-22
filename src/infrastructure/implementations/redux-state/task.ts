@@ -1,7 +1,7 @@
 import { ITask } from '@bic_todo/domain/entities/task';
 import { ITaskState } from '@bic_todo/domain/state-managers/task-state';
-import { ReduxTaskActions } from '@bic_todo/infrastructure/redux/slices/taskSlice';
-import { AppDispatch } from '@bic_todo/infrastructure/redux/store';
+import { ReduxTaskActions } from '@bic_todo/infrastructure/services/redux/slices/taskSlice';
+import { AppDispatch } from '@bic_todo/infrastructure/services/redux/store';
 
 class ReduxTaskState implements ITaskState {
   constructor(private readonly dispatch: AppDispatch) {}

@@ -1,3 +1,5 @@
+import { ICategory } from '@bic_todo/domain/entities/category';
+import { ITask } from '@bic_todo/domain/entities/task';
 import { ParamListBase } from '@react-navigation/native';
 import {
   NativeStackNavigationProp,

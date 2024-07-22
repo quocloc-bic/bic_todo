@@ -1,7 +1,7 @@
 import { ICategory } from '@bic_todo/domain/entities/category';
 import { ICategoryState } from '@bic_todo/domain/state-managers/category-state';
-import { ReduxCategoryActions } from '@bic_todo/infrastructure/redux/slices/categorySlice';
-import { AppDispatch } from '@bic_todo/infrastructure/redux/store';
+import { ReduxCategoryActions } from '@bic_todo/infrastructure/services/redux/slices/categorySlice';
+import { AppDispatch } from '@bic_todo/infrastructure/services/redux/store';
 
 class ReduxCategoryState implements ICategoryState {
   constructor(private readonly dispatch: AppDispatch) {}

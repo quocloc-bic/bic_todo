@@ -1,6 +1,6 @@
 import { ITask } from '@bic_todo/domain/entities/task';
 import { ITaskRepository } from '@bic_todo/domain/repositories/task-repository';
-import SQLite from '@bic_todo/infrastructure/database/sqlite';
+import SQLite from '@bic_todo/infrastructure/services/database/sqlite';
 
 export class SqliteTaskRepository implements ITaskRepository {
   constructor(private readonly database: SQLite) {}

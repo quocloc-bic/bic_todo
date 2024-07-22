@@ -56,5 +56,3 @@ const TaskTile = (props: TaskTileProps) => {
 };
 
 export default TaskTile;
-
-const styles = StyleSheet.create({});

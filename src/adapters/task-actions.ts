@@ -2,8 +2,8 @@ import { ITask } from '@bic_todo/domain/entities/task';
 import * as TaskUseCases from '@bic_todo/domain/use-cases/task';
 import { useReduxTaskState } from '@bic_todo/infrastructure/implementations/redux-state/task';
 import { useSqliteTaskRepository } from '@bic_todo/infrastructure/implementations/sqlite-repositories/task';
-import { useAppSelector } from '@bic_todo/infrastructure/redux/hooks';
-import { AppDispatch } from '@bic_todo/infrastructure/redux/store';
+import { useAppSelector } from '@bic_todo/infrastructure/services/redux/hooks';
+import { AppDispatch } from '@bic_todo/infrastructure/services/redux/store';
 import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 

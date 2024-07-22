@@ -206,5 +206,3 @@ const TaskActions = (props: TaskActionsProps) => {
 };
 
 export default TaskActions;
-
-const styles = StyleSheet.create({});
